@@ -10,26 +10,22 @@ public class Main2 {
     public static int total;
 
     public static void main(String[] args) throws IOException {
-
         //File reading section
         List<String> text = new ArrayList<>();
         text = Files.readAllLines(Path.of("piworks.txt"));
-        int[][] matrix = new int[text.size()][text.get(text.size() - 1).split("\\s").length];
+        int[][] matrix = new int[text.size()][text.size()];
 
         //defining
         int column = 0, pathSum = 0;
-
+        //split the lines word by word, then put them into matrix
         for (int i = 0; i < text.size(); i++) {
-            for (int j = 0; j <  column ; j++) {
-
-                String[] element = text.get(i).split("\\s");
-                matrix[i][column++] = Integer.parseInt(element[j]);
+            String[] wordsInLine = text.get(i).split(" ");
+            for (int j = 0; j < wordsInLine.length; j++) {
+                matrix[i][column++] = Integer.parseInt(wordsInLine[j]);
             }
             column = 0;
         }
-
-
-
+        
         //main function
         pathResult(matrix, pathSum, 0, 0);
         //display
@@ -73,6 +69,4 @@ public class Main2 {
             total = pathSum;
         }
     }
-
-
 }
